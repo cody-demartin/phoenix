@@ -24,5 +24,12 @@ channel.push("pong", {})
 channel.push("param_ping", { error: true })
     .receive("error", resp => console.error("param_ping error:", resp));
 
+// on an event..
+channel.on("send_ping", (payload) => {
+    console.log("ping requested", payload)
+    channel.push("ping", {})
+        .receive("ok", resp => console.log("ping:", resp.ping))
+})
+
 export default socket
 
