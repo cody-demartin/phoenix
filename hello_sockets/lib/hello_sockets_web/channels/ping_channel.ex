@@ -5,6 +5,10 @@ defmodule HelloSocketsWeb.PingChannel do
     {:ok, socket}
   end
 
+  def handle_in("ping:" <> phrase, _payload, socket) do
+    {:reply, {:ok, %{ping: phrase}}, socket}
+  end
+
   def handle_in("ping", %{"ack_phrase" => ack_phrase}, socket) do
     {:reply, {:ok, %{ping: ack_phrase}}, socket}
   end
