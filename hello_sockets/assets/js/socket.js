@@ -31,5 +31,9 @@ channel.on("send_ping", (payload) => {
         .receive("ok", resp => console.log("ping:", resp.ping))
 })
 
+// simulates unhandled error
+channel.push("invalid", {})
+    .receive("ok", resp => console.error("o no I don't ever run"))
+
 export default socket
 
