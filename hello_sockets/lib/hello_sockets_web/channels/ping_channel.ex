@@ -17,4 +17,14 @@ defmodule HelloSocketsWeb.PingChannel do
     {:reply, {:ok, %{ping: "pong"}}, socket}
   end
 
+  def handle_in("pong", _payload, socket) do
+    # only handle the ping
+
+    {:noreply, socket}
+  end
+
+  def handle_in("ding", _payload, socket) do
+    {:stop, :shutdown, {:ok, %{msg: "shutting down"}}, socket}
+  end
+
 end
