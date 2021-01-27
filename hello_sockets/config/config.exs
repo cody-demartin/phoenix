@@ -10,7 +10,7 @@ use Mix.Config
 # Configures the endpoint
 config :hello_sockets, HelloSocketsWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "VzeZQpVmV1dmlM48g4eexfKMRAir++0yZwMZzMSU0JOQvACnixeSCdXTdtSFAo0U",
+  secret_key_base: "L19JXC78BUr2oSahfwy730JubNp7p1s46fYV6IpWO89LpeKXUvXOVtvAbkpZ3IqO",
   render_errors: [view: HelloSocketsWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: HelloSockets.PubSub,
   live_view: [signing_salt: "/foRKYvL"]
