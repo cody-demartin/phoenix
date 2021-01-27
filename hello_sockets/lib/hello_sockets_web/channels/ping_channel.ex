@@ -13,4 +13,4 @@ defmodule HelloSocketsWeb.PingChannel do
     {:reply, {:ok, %{ping: "pong"}}, socket}
   end
 
-end 
+end

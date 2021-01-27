@@ -1,4 +1,4 @@
-defmodule HelloSocketsWeb.WildcardChanel do
+defmodule HelloSocketsWeb.WildcardChannel do
   use Phoenix.Channel
 
   def join("wild:" <> numbers, _payload, socket) do
