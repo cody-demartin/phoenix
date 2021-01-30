@@ -12,13 +12,13 @@ defmodule HelloSocketsWeb.RecurringChannel do
     Process.send_after(self(), :send_token, @send_after)
   end
 
-  def hanle_info(:send_token, socket) do
+  def handle_info(:send_token, socket) do
       schedule_send_token()
       push(socket, "new_token", %{token: new_token(socket)})
       {:noreply, socket}
   end
 
-  defp new_token(socket = %{assigns: %{assigns: %{user_id: user_id}}}) do
+  defp new_token( socket = %{ assigns: %{ user_id: user_id } } ) do
     Phoenix.Token.sign(socket, "hello", user_id)
   end
 end
