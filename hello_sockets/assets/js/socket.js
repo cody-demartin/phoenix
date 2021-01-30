@@ -35,5 +35,15 @@ channel.on("send_ping", (payload) => {
 channel.push("invalid", {})
     .receive("ok", resp => console.error("o no I don't ever run"))
 
+
+/////////////////////////////////////////////////////////////
+
+const authSocket = new Socket("/auth_socket", {
+    params: { token: window.authToken }
+})
+
+authSocket.onOpen(() => console.log('authSocket connected'))
+authSocket.connect()
+
 export default socket
 
