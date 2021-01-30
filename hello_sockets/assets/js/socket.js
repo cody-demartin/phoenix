@@ -1,6 +1,6 @@
 import { Socket } from 'phoenix';
 
-// create and connect to new socket
+// create and connect to new general socket
 const socket = new Socket("/socket", {});
 socket.connect();
 
