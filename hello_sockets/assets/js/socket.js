@@ -45,5 +45,12 @@ const authSocket = new Socket("/auth_socket", {
 authSocket.onOpen(() => console.log('authSocket connected'))
 authSocket.connect()
 
+// connect to recurring channel
+const recurringChannel = authSocket.channel("recurring");
+recurringChannel.on("new_token", (payload) => {
+    console.log("received new auth token", payload)
+})
+recurringChannel.join()
+
 export default socket
 
