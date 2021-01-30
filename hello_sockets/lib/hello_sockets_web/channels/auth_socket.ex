@@ -2,10 +2,20 @@ defmodule HelloSocketsWeb.AuthSocket do
   use Phoenix.Socket
   require Logger
 
+  def join("user:" <> req_user_id, _payload, socket = %{assigns: %{user_id: user_id}}) do
+      if req_user_id == to_string(user_id) do
+        {:ok, socket}
+      else
+        Logger.error("#{__MODULE__} failed #{req_user_id} != #{user_id}")
+        {:error, %{reason: "unauthorized"}}
+      end
+    end
+
   @one_day 86400
 
   channel "ping", HelloSocketsWeb.PingChannel
   channel "tracked", HelloSocketsWeb.TrackedChannel
+  channel "user:*", HelloSocketsWeb.AuthChannel
 
     def connect(%{"token" => token}, socket) do
       case verify(socket, token) do
