@@ -24,6 +24,11 @@ defmodule HelloSocketsWeb.PingChannel do
     {:noreply, socket}
   end
 
+  def handle_in("invalid", payload, socket) do
+    IO.inspect(payload)
+    {:noreply, socket}
+  end
+
   def handle_in("ding", _payload, socket) do
     {:stop, :shutdown, {:ok, %{msg: "shutting down"}}, socket}
   end

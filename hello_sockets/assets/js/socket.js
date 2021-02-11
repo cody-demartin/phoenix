@@ -52,5 +52,14 @@ recurringChannel.on("new_token", (payload) => {
 })
 recurringChannel.join()
 
+// dupe channel logic
+const dupeChannel = socket.channel("dupe")
+
+dupeChannel.on("number", (payload) => {
+    console.log("new number received", payload)
+})
+
+dupeChannel.join()
+
 export default socket
 
