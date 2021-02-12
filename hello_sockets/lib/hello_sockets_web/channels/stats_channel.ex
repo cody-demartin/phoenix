@@ -35,6 +35,7 @@ defmodule HelloSocketsWeb.StatsChannel do
   end
 
   defp channel_join_increment(status) do
+    # 1 will be incremented for each time statschannel is joined, can probably use this for traffic metrics
     HelloSockets.Statix.increment("channel_join", 1, tags: ["status:#{status}", "channel:StatsChannel"])
   end
 
