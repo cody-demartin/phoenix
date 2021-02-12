@@ -80,17 +80,32 @@ for (let i = 0; i < 5; i++) {
 //////////////////////////////////////////
 // slowStatsSocket
 
-const slowStatsSocket = new Socket("/stats_socket", {})
-slowStatsSocket.connect()
+// const slowStatsSocket = new Socket("/stats_socket", {})
+// slowStatsSocket.connect()
 
-const slowStatsChannel = slowStatsSocket.channel("valid")
-slowStatsChannel.join()
+// const slowStatsChannel = slowStatsSocket.channel("valid")
+// slowStatsChannel.join()
+
+// for (let i = 0; i < 5; i++) {
+//     slowStatsChannel.push("slow_ping", {})
+//         .receive("ok", () => console.log("Slow ping response received", i))
+// }
+// console.log("5 slow pings requested")
+
+//////////////////////////////////////////
+// fastStatsSocket
+
+const fastStatsSocket = new Socket("/stats_socket", {})
+fastStatsSocket.connect()
+
+const fastStatsChannel = fastStatsSocket.channel("valid")
+fastStatsChannel.join()
 
 for (let i = 0; i < 5; i++) {
-    slowStatsChannel.push("slow_ping", {})
-        .receive("ok", () => console.log("Slow ping response received", i))
+    fastStatsChannel.push("parallel_slow_ping", {})
+        .receive("ok", () => console.log("Parallel slow ping response", i))
 }
-console.log("5 slow pings requested")
+console.log("5 PARALLEL slow pings requested")
 
 export default socket
 
