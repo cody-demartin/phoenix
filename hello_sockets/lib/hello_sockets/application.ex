@@ -6,6 +6,8 @@ defmodule HelloSockets.Application do
   use Application
 
   def start(_type, _args) do
+    :ok = HelloSockets.Statix.connect()
+    
     children = [
       # Start the Telemetry supervisor
       HelloSocketsWeb.Telemetry,
