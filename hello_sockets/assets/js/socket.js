@@ -54,11 +54,11 @@ authUserChannel.on("push", (payload) => {
 authUserChannel.join()
 
 // connect to recurring channel
-const recurringChannel = authSocket.channel("recurring");
-recurringChannel.on("new_token", (payload) => {
-    console.log("received new auth token", payload)
-})
-recurringChannel.join()
+// const recurringChannel = authSocket.channel("recurring");
+// recurringChannel.on("new_token", (payload) => {
+//     console.log("received new auth token", payload)
+// })
+// recurringChannel.join()
 
 // dupe channel logic
 const dupeChannel = socket.channel("dupe")
