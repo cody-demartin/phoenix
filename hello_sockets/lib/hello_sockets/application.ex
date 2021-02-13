@@ -5,15 +5,26 @@ defmodule HelloSockets.Application do
 
   use Application
 
+  alias HelloSockets.Pipeline.{Consumer, Producer}
+
   def start(_type, _args) do
     :ok = HelloSockets.Statix.connect()
-    
+
     children = [
       # Start the Telemetry supervisor
       HelloSocketsWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: HelloSockets.PubSub},
       # Start the Endpoint (http/https)
+
+      # adding before endpoint because want pipeline to be available before
+      # web endpoints are
+      # if we added after "no process" errors could exist
+      # min/max demand helps us configure to only process a few items at a time
+      # for in memory configs, keep the amount low. if going to DB, make it
+      # higher to reduce the amount of aync calls to DB
+      {Producer, name: Producer},
+      {Consumer, subscribe_to: [{Producer, max_demand: 10, min_demand: 5}]},
       HelloSocketsWeb.Endpoint
       # Start a worker by calling: HelloSockets.Worker.start_link(arg)
       # {HelloSockets.Worker, arg}
