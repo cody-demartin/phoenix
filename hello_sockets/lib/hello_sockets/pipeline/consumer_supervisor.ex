@@ -15,7 +15,7 @@ defmodule HelloSockets.Pipeline.ConsumerSupervisor do
       [strategy: :one_for_one, subscribe_to: subscribe_to]
 
     children = [
-      %{id: Worker, start: {Worker, :strart_link, []}, restart: :transient}
+      %{id: Worker, start: {Worker, :start_link, []}, restart: :transient}
     ]
 
     ConsumerSupervisor.init(children, supervisor_opts)

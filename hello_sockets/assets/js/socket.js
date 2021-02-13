@@ -45,6 +45,14 @@ const authSocket = new Socket("/auth_socket", {
 authSocket.onOpen(() => console.log('authSocket connected'))
 authSocket.connect()
 
+const authUserChannel = authSocket.channel(`user:${window.userId}`)
+
+// testing concurrent consumer Process function
+authUserChannel.on("push", (payload) => {
+    console.log("received auth user push", payload) 
+})
+authUserChannel.join()
+
 // connect to recurring channel
 const recurringChannel = authSocket.channel("recurring");
 recurringChannel.on("new_token", (payload) => {
@@ -106,6 +114,8 @@ for (let i = 0; i < 5; i++) {
         .receive("ok", () => console.log("Parallel slow ping response", i))
 }
 console.log("5 PARALLEL slow pings requested")
+
+
 
 export default socket
 
