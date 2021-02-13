@@ -10,3 +10,5 @@ defmodule HelloSockets.Pipeline.Worker do
     HelloSocketsWeb.Endpoint.broadcast!("user:#{user_id}", "push", data)
   end
 end
+
+#TODO: add the performance testing metrics and tests for concurrent pipeline
